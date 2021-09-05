@@ -40,9 +40,9 @@ class EmployeeController extends Controller
      */
     public function store(EmployeeRequest $request)
     {
-        $employee = new Employee();
+        
 
-        Employee::create([
+        $employee = Employee::create([
             'first_name'  => $request->first_name,
             'family_name' => $request->family_name,
             'middle_name' => $request->middle_name,
@@ -50,8 +50,9 @@ class EmployeeController extends Controller
             'salary'      => $request->salary
         ]);
 
-        
-        $employee->departments()->attach($request->departments);
+        $employee->departments()->attach($request->departments);  
+
+        return redirect()->route('employees.create');    
         
     }
 
