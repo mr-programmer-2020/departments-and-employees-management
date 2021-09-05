@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\HTTP\Controllers\HomeController;
+use App\HTTP\Controllers\DepartmentController;
+use App\HTTP\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[HomeController::class,'index'])->name('index');
+
+Route::resource('departments',DepartmentController::class);
+Route::resource('employees',EmployeeController::class);  
+
+//Route::resource('departments/create',DepartmentController::class);
