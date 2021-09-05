@@ -41,7 +41,7 @@ class EmployeeController extends Controller
     public function store(EmployeeRequest $request)
     {
         $employee = new Employee();
-        
+
         Employee::create([
             'first_name'  => $request->first_name,
             'family_name' => $request->family_name,
@@ -51,8 +51,8 @@ class EmployeeController extends Controller
         ]);
 
         
-        $employee->$request->input('departments');
-        $employee->save();
+        $employee->departments()->attach($request->departments);
+        
     }
 
     /**
