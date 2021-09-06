@@ -93,7 +93,7 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
-        die();
+        
         Department::findOrFail($id)->delete(); 
         
         return redirect()->route('departments.index');

@@ -75,7 +75,8 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $employee = Employee::findOrFail($id); 
+        return view('employee.edit')->with('employee',$employee)->with('departments',Department::all());
     }
 
     /**
@@ -87,7 +88,19 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $employee = Employee::findOrFail($id);
+
+        $employee->first_name   = $request->first_name;
+        $employee->family_name  = $request->family_name;
+        $employee->middle_name  = $request->middle_name;
+        $employee->gender       = $request->gender;
+        $employee->salary       = $request->salary;
+
+        $employee->save();
+
+        $employee->departments()->sync($request->departments);  
+
+        return redirect()->route('employees.index');   
     }
 
     /**
@@ -98,6 +111,8 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Employee::findOrFail($id)->delete(); 
+        
+        return redirect()->route('employees.index');
     }
 }
