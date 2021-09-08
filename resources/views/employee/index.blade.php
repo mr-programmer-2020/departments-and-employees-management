@@ -17,7 +17,11 @@
                         <thead>
                             <tr>
                                 <th scope="col">no</th>
-                                <th scope="col">firt name</th>
+                                <th scope="col">first name</th>
+                                <th scope="col">family name</th>
+                                <th scope="col">gender</th>
+                                <th scope="col">salary</th>
+                                <th scope="col">departments</th>
                                 <th scope="col">edit</th>
                                 <th scope="col">delete</th>
                             </tr>
@@ -26,13 +30,39 @@
                             @foreach ($employees as $employee)
                             <tr> 
                                
-                                <th scope="row">
+                                <td scope="row">
                                     {{$employee->id}}
-                                </th>
+                                </td>
 
-                                <th scope="row">
+                                <td scope="row">
                                     {{$employee->first_name}}
-                                </th>
+                                </td>
+
+                                <td scope="row">
+                                    {{$employee->family_name}}
+                                </td>
+
+                                <td scope="row">
+                                    {{$employee->gender}}
+                                </td>
+
+                                <td scope="row">
+                                    {{$employee->salary}}
+                                </td>
+
+                                
+
+                                <td scope="row">
+                                   @if(count($employee->departments) > 0)
+                                    @foreach ($employee->departments as $department)
+                                    @if(count($employee->departments) > 1 )
+                                    <span >{{ $department->department_name }}</span>,
+                                    @else
+                                     <span >{{ $department->department_name }}</span>
+                                    @endif
+                                    @endforeach
+                                    @endif
+                                </td>
 
                                 <td>               
                                     <a href="{{route('employees.edit',$employee->id)}}">

@@ -19,7 +19,7 @@ class Employee extends Model
 
     public function departments()
     {
-        return $this->belongsToMany(Employee::class, 'employee_department', 'employee_id', 'department_id');
+        return $this->belongsToMany(Department::class, 'employee_department', 'employee_id', 'department_id');
     }
 }
 
