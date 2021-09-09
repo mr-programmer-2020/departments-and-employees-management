@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\HTTP\Requests\DepartmentRequest;
 use App\Models\Department; 
+use App\Models\Employee; 
 
 class DepartmentController extends Controller
 {
@@ -16,12 +17,12 @@ class DepartmentController extends Controller
     public function index()
     {
         $departments = Department::all();
-
+        
         return view('department.index')->with('departments',$departments);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new resource. 
      *
      * @return \Illuminate\Http\Response
      */
