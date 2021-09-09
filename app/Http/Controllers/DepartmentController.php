@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\HTTP\Requests\DepartmentRequest;
 use App\Models\Department; 
 use App\Models\Employee; 
+use DB;
 
 class DepartmentController extends Controller
 {
@@ -17,8 +18,9 @@ class DepartmentController extends Controller
     public function index()
     {
         $departments = Department::all();
+        $maxSalary= DB::table('employees')->max('salary');
         
-        return view('department.index')->with('departments',$departments);
+        return view('department.index')->with('departments',$departments)->with('maxSalary',$maxSalary);
     }
 
     /**
