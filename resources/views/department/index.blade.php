@@ -18,6 +18,7 @@
                             <tr>
                                 <th scope="col">no</th>
                                 <th scope="col">name</th>
+                                <th scope="col">max salary</th>
                                 <th scope="col">edit</th>
                                 <th scope="col">delete</th>
                             </tr>
