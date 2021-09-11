@@ -11,41 +11,44 @@
     <br>
 
     <div>
-         @if($departments->count()>0)
+         @if($results->count()>0)
 
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">no</th>
+                                
                                 <th scope="col">name</th>
+                                <th scope="col">count</th>
                                 <th scope="col">max salary</th>
                                 <th scope="col">edit</th>
                                 <th scope="col">delete</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($departments as $department)
+                            @foreach ($results as $result)
+
+
                             <tr> 
                                
                                 <td scope="row">
-                                    {{$department->id}}
+                                    {{$result->department_name}}
                                 </td>
 
                                 <td scope="row">
-                                    {{$department->department_name}}
+                                {{$result->count}}
                                 </td>
 
                                 <td scope="row">
-                                    {{$maxSalary}}
+                                {{$result->max_salary}}
                                 </td>
 
                                 <td>               
-                                    <a href="{{route('departments.edit',$department->id)}}">
+                                    <a href="{{route('departments.edit', $result->id)}}">
                                         <i class="fas fa-edit"></i>  
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="{{route('departments.destroy',$department->id)}}">
+                                    <a href="{{route('departments.destroy', $result->id)}}">
                                         <i class="far fa-trash-alt"></i>
                                     </a>
                                 </td>     

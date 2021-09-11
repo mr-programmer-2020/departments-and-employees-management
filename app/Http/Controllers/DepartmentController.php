@@ -17,13 +17,34 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $departments = Department::all();
-        $maxSalary= DB::table('employees')->max('salary');
-        
-        return view('department.index')->with('departments',$departments)->with('maxSalary',$maxSalary);
+    
+        //SELECT `departments`.`department_name`, MAX(`employees`.`salary`)
+// FROM `employee_department`
+// INNER JOIN employees
+// ON `employee_department`.`employee_id` = `employees`.`id`
+// INNER JOIN departments
+// ON `employee_department`.`department_id` = `departments`.`id`
+// GROUP BY `departments`.`department_name`
+// ORDER BY MAX(`employees`.`salary`) DESC
+
+
+        $results = DB::table('employee_department')
+        ->select(DB::raw("`departments`.`department_name`, `departments`.`id`,
+        MAX(`employees`.`salary`) as 'max_salary', 
+        COUNT(`employees`.`id`) as 'count'"))
+        ->join('employees', 'employee_department.employee_id', '=', 'employees.id')
+        ->join('departments', 'employee_department.department_id', '=', 'departments.id')
+        ->groupBy(['departments.department_name','departments.id'])
+        ->orderByDesc('max_salary')
+        ->get();
+
+
+        return view('department.index',[
+            'results'=>$results
+        ]);
     }
 
-    /**
+    /**(select DeptId, max(salary) from Employee group by DeptId)
      * Show the form for creating a new resource. 
      *
      * @return \Illuminate\Http\Response
